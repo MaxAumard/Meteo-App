@@ -10,10 +10,12 @@ import SwiftUI
 
 @main
 struct WeatherApp: App {
+    @StateObject var temperatureSettings = TemperatureSettings()
+
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                CityListView()
+                CityListView().environmentObject(temperatureSettings)
             }
         }
     }

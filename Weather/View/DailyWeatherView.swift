@@ -11,7 +11,8 @@ import SwiftUI
 
 struct DailyWeatherView: View {
     var dailyWeather: DailyWeather?
-    
+    @EnvironmentObject private var temperatureSettings: TemperatureSettings
+
     var body: some View {
         if let dailyWeather = dailyWeather {
             VStack(alignment: .leading, spacing: 10) {
@@ -32,10 +33,10 @@ struct DailyWeatherView: View {
                         
                         Spacer()
                         
-                        Text("\(Int(dailyWeather.temperatureMin[index]))°")
+                        Text("\(dailyWeather.temperatureMin[index].formatTemperature(unit: temperatureSettings.unit))°")
                             .frame(width: 50, alignment: .leading)
                         
-                        Text("\(Int(dailyWeather.temperatureMax[index]))°")
+                        Text("\(dailyWeather.temperatureMax[index].formatTemperature(unit: temperatureSettings.unit))°")
                             .frame(width: 50, alignment: .trailing)
                     }
                     .padding(.horizontal, 30)

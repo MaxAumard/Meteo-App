@@ -12,6 +12,7 @@ import SwiftUI
 struct CityDetailView: View {
     var city: CityLocation
     @StateObject private var viewModel = CityDetailViewModel()
+    @EnvironmentObject private var temperatureSettings: TemperatureSettings
 
     var body: some View {
         VStack {
@@ -22,12 +23,13 @@ struct CityDetailView: View {
 
                 Text(city.name)
                     .font(.largeTitle)
-                Text("\(Int(nowWeather.temperature))°")
+                    Text("\(nowWeather.temperature.formatTemperature(unit: temperatureSettings.unit))°")
                     .font(.largeTitle)
                     .bold()
-                }
+                
                 Text(WeatherCondition(rawValue: city.nowWeather?.weatherCode ?? -1)?.description ?? "")
-                    .padding(.bottom, 40)
+                }.padding(.top, -30)
+                    .padding(.bottom, 20)
                 HourlyWeatherView(hourlyWeather: viewModel.hourlyWeather)
                 
                 DailyWeatherView(dailyWeather: viewModel.dailyWeather)
@@ -38,6 +40,7 @@ struct CityDetailView: View {
         .onAppear {
             viewModel.fetchWeatherForecast(for: city)
         }
+
     }
 }
 

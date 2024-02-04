@@ -26,6 +26,8 @@
 		828CDB732B6F35C000367BC0 /* HourlyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828CDB722B6F35C000367BC0 /* HourlyWeatherView.swift */; };
 		828CDB752B6F35F400367BC0 /* DailyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828CDB742B6F35F400367BC0 /* DailyWeatherView.swift */; };
 		828CDB772B6F4F0200367BC0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 828CDB762B6F4F0200367BC0 /* README.md */; };
+		828CDB792B6FC4F900367BC0 /* TemperatureUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828CDB782B6FC4F900367BC0 /* TemperatureUnit.swift */; };
+		828CDB7B2B6FFE5600367BC0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828CDB7A2B6FFE5600367BC0 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		828CDB722B6F35C000367BC0 /* HourlyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherView.swift; sourceTree = "<group>"; };
 		828CDB742B6F35F400367BC0 /* DailyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherView.swift; sourceTree = "<group>"; };
 		828CDB762B6F4F0200367BC0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		828CDB782B6FC4F900367BC0 /* TemperatureUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUnit.swift; sourceTree = "<group>"; };
+		828CDB7A2B6FFE5600367BC0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 				821696CB2B6E50F60042EA3E /* WeatherData.swift */,
 				821696DC2B6E5FE20042EA3E /* CitySearchResult.swift */,
 				821696E42B6F0FE80042EA3E /* WeatherCondition.swift */,
+				828CDB782B6FC4F900367BC0 /* TemperatureUnit.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -113,6 +118,7 @@
 				821696D12B6E513F0042EA3E /* AddCityView.swift */,
 				828CDB722B6F35C000367BC0 /* HourlyWeatherView.swift */,
 				828CDB742B6F35F400367BC0 /* DailyWeatherView.swift */,
+				828CDB7A2B6FFE5600367BC0 /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -326,12 +332,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				828CDB7B2B6FFE5600367BC0 /* SettingsView.swift in Sources */,
 				821696DD2B6E5FE20042EA3E /* CitySearchResult.swift in Sources */,
 				821696DA2B6E52550042EA3E /* WeatherService.swift in Sources */,
 				821696CE2B6E511D0042EA3E /* CityListView.swift in Sources */,
 				82337E772B57CBAB00D8352E /* WeatherApp.swift in Sources */,
 				828CDB752B6F35F400367BC0 /* DailyWeatherView.swift in Sources */,
 				821696E52B6F0FE80042EA3E /* WeatherCondition.swift in Sources */,
+				828CDB792B6FC4F900367BC0 /* TemperatureUnit.swift in Sources */,
 				821696DF2B6E600A0042EA3E /* GeocodingService.swift in Sources */,
 				821696D72B6E52170042EA3E /* CityDetailViewModel.swift in Sources */,
 				821696D52B6E51FB0042EA3E /* CityListViewModel.swift in Sources */,

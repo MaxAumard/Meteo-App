@@ -11,12 +11,19 @@ import SwiftUI
 
 struct CityListView: View {
     @ObservedObject var viewModel = CityListViewModel()
+    @EnvironmentObject var temperatureSettings: TemperatureSettings
+
+    private func removeCity(at offsets: IndexSet){
+        viewModel.cities.remove(atOffsets: offsets)
+        viewModel.saveCities()
+    }
+    
     
     var body: some View {
         List {
             ForEach(viewModel.cities, id: \.id) { city in
-                NavigationLink(destination: CityDetailView(city: city)) {
-                    WeatherCard(location: "\(city.name), \(city.country)", temperature: "\(Int(city.nowWeather?.temperature ?? 0))°", condition: WeatherCondition(rawValue: city.nowWeather?.weatherCode ?? -1 )?.description ?? " ")
+                NavigationLink(destination: CityDetailView(city: city).environmentObject(temperatureSettings)) {
+                    WeatherCard(location: "\(city.name), \(city.country)", temperature: "\((city.nowWeather?.temperature ?? 0).formatTemperature(unit: temperatureSettings.unit))°", condition: WeatherCondition(rawValue: city.nowWeather?.weatherCode ?? -1 )?.description ?? " ")
                 }
                 .listRowBackground(Color(UIColor.systemBackground))
                 .cornerRadius(10)
@@ -28,6 +35,13 @@ struct CityListView: View {
         .listStyle(PlainListStyle())
         .navigationTitle("Mes météos")
         .toolbar {
+            
+            ToolbarItem(placement: .navigationBarLeading) {
+                NavigationLink(destination: SettingsView().environmentObject(temperatureSettings)) {
+                    Image(systemName: "gear")
+                }
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: AddCityView(viewModel: viewModel)) {
                     Text("Ajouter une ville")
@@ -38,19 +52,13 @@ struct CityListView: View {
             viewModel.fetchWeatherForAllCities()
         }
     }
-    
-    private func removeCity(at offsets: IndexSet){
-        viewModel.cities.remove(atOffsets: offsets)
-        viewModel.saveCities()
-    }
 }
 
 struct WeatherCard: View {
     var location: String
     var temperature: String
     var condition: String
-    
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {

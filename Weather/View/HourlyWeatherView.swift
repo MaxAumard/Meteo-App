@@ -10,6 +10,8 @@ import SwiftUI
 
 
 struct HourlyWeatherView: View {
+    @EnvironmentObject private var temperatureSettings: TemperatureSettings
+
     var hourlyWeather: HourlyWeather?
     
     var body: some View {
@@ -32,7 +34,7 @@ struct HourlyWeatherView: View {
                                     .padding(.vertical, 10)
                                 Image(systemName: WeatherCondition(rawValue: hourlyWeather.weatherCode[index] )?.iconName ?? "")
                                     .font(.title)
-                                Text("\(Int(hourlyWeather.temperature[index]))°")
+                                Text("\(hourlyWeather.temperature[index].formatTemperature(unit: temperatureSettings.unit))°")
                                     .font(.headline)
                                     .padding(.vertical, 10)
                             }
