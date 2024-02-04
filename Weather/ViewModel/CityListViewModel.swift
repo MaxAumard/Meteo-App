@@ -41,6 +41,26 @@ class CityListViewModel: ObservableObject {
             cities = decodedCities
         }
     }
+    
+    func fetchWeatherForAllCities() {
+        for i in 0..<cities.count {
+            let city = cities[i]
+            Task {
+                do {
+                    let nowWeather = try await WeatherService().fetchWeatherNow(latitude: city.latitude, longitude: city.longitude)
+                    DispatchQueue.main.async {
+                        self.cities[i].nowWeather = nowWeather
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        self.errorMessage = "Impossible de récupérer la météo pour \(city.name)."
+                        self.showError = true
+                    }
+                }
+            }
+        }
+    }
+
 
 }
 

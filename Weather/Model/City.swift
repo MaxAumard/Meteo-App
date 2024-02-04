@@ -13,6 +13,7 @@ struct City: Identifiable, Decodable {
     var name: String
     var latitude: Double
     var longitude: Double
+    var nowWeather: NowWeather?
     
     init(name: String, latitude: Double, longitude: Double) {
         self.name = name

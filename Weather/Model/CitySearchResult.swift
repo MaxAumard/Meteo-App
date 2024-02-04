@@ -17,4 +17,6 @@ struct CityLocation: Codable, Identifiable {
     let country: String	
     let latitude: Double
     let longitude: Double
+    var nowWeather: NowWeather?
+
 }

@@ -13,8 +13,15 @@ struct CityListView: View {
     @ObservedObject var viewModel = CityListViewModel()
     
     var body: some View {
-        List(viewModel.cities) { city in
-            Text("\(city.name), \(city.country)")
+        ScrollView {
+            LazyVStack {
+                ForEach(viewModel.cities) { city in
+                    NavigationLink(destination: CityDetailView(city: city)) {
+                        WeatherCard(location: "\(city.name), \(city.country)", temperature: "\(city.nowWeather?.temperature ?? 0)°", condition: WeatherCondition(rawValue: city.nowWeather?.weatherCode ?? -1 )?.description ?? " ")
+                            .padding(.bottom, 10)
+                    }.accentColor(Color(UIColor.label))
+                }
+            }
         }
         .navigationTitle("Mes météos")
         .toolbar {
@@ -24,6 +31,39 @@ struct CityListView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.fetchWeatherForAllCities()
+        }
     }
 }
 
+struct WeatherCard: View {
+    var location: String
+    var temperature: String
+    var condition: String
+    
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 1) {
+            HStack {
+                Text(location)
+                    .font(.title)
+                
+                Spacer()
+                
+                Text(temperature)
+                    .font(.title)
+                    .fontWeight(.bold)
+            }
+            
+            Text(condition)
+                .font(.subheadline)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(10)
+        .shadow(radius: 5)
+        .padding(10)
+    }
+}
