@@ -13,16 +13,19 @@ struct CityListView: View {
     @ObservedObject var viewModel = CityListViewModel()
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(viewModel.cities) { city in
-                    NavigationLink(destination: CityDetailView(city: city)) {
-                        WeatherCard(location: "\(city.name), \(city.country)", temperature: "\(city.nowWeather?.temperature ?? 0)°", condition: WeatherCondition(rawValue: city.nowWeather?.weatherCode ?? -1 )?.description ?? " ")
-                            .padding(.bottom, 10)
-                    }.accentColor(Color(UIColor.label))
+        List {
+            ForEach(viewModel.cities, id: \.id) { city in
+                NavigationLink(destination: CityDetailView(city: city)) {
+                    WeatherCard(location: "\(city.name), \(city.country)", temperature: "\(Int(city.nowWeather?.temperature ?? 0))°", condition: WeatherCondition(rawValue: city.nowWeather?.weatherCode ?? -1 )?.description ?? " ")
                 }
+                .listRowBackground(Color(UIColor.systemBackground))
+                .cornerRadius(10)
+                .shadow(radius: 5)
             }
+            
+            .onDelete(perform: removeCity)
         }
+        .listStyle(PlainListStyle())
         .navigationTitle("Mes météos")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -35,6 +38,11 @@ struct CityListView: View {
             viewModel.fetchWeatherForAllCities()
         }
     }
+    
+    private func removeCity(at offsets: IndexSet){
+        viewModel.cities.remove(atOffsets: offsets)
+        viewModel.saveCities()
+    }
 }
 
 struct WeatherCard: View {
@@ -44,7 +52,7 @@ struct WeatherCard: View {
     
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 1) {
+        VStack(alignment: .leading) {
             HStack {
                 Text(location)
                     .font(.title)
@@ -64,6 +72,5 @@ struct WeatherCard: View {
         .background(Color(UIColor.systemBackground))
         .cornerRadius(10)
         .shadow(radius: 5)
-        .padding(10)
     }
 }

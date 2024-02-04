@@ -42,6 +42,16 @@ class CityListViewModel: ObservableObject {
         }
     }
     
+    func removeCity(_ city: CityLocation) {
+        if let index = cities.firstIndex(where: { $0.id == city.id }) {
+            DispatchQueue.main.async {
+                self.cities.remove(at: index)
+                self.saveCities()
+            }
+        }
+    }
+
+    
     func fetchWeatherForAllCities() {
         for i in 0..<cities.count {
             let city = cities[i]

@@ -89,4 +89,17 @@ enum WeatherCondition: Int {
         case .thunderstormHeavy: return "Orage fort"
         }
     }
+    var iconName: String {
+        switch self {
+        case .clearSky: return "sun.max.fill"
+        case .mainlyClear, .partlyCloudy: return "cloud.sun.fill"
+        case .overcast: return "cloud.fill"
+        case .fog, .fogAndDepositingRimeFog: return "cloud.fog.fill"
+        case .drizzleLight, .drizzleModerate, .drizzleDense, .freezingDrizzleLight, .freezingDrizzleDense: return "cloud.drizzle.fill"
+        case .rainSlight, .rainModerate, .rainHeavy, .freezingRainLight, .freezingRainHeavy: return "cloud.rain.fill"
+        case .snowFallSlight, .snowFallModerate, .snowFallHeavy, .snowGrains, .snowShowersSlight, .snowShowersHeavy: return "cloud.snow.fill"
+        case .rainShowersSlight, .rainShowersModerate, .rainShowersViolent: return "cloud.heavyrain.fill"
+        case .thunderstormSlight, .thunderstormModerate, .thunderstormHeavy: return "cloud.bolt.rain.fill"
+        }
+    }
 }
