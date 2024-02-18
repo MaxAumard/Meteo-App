@@ -18,6 +18,6 @@ Weather est une application météo pour iOS conçue avec SwiftUI en suivant le 
 
 ## Configuration
 Clonez le dépôt, ouvrez le projet dans Xcode et exécutez-le sur un simulateur ou un appareil physique sous **iOS 15.0** ou ultérieur.
-
+
 ## Contribution
 Ce projet est destiné à un usage personnel et à l'apprentissage du langage swift et du framework SwiftUI
